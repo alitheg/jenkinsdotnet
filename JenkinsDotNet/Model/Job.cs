@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace JenkinsDotNet.Model
 {
+    /// <summary>
+    /// Represents an individual job 
+    /// </summary>
     public class Job : JenkinsModel
     {
         public string Name { get; set; }

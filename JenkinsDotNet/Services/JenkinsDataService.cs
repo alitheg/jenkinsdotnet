@@ -9,12 +9,15 @@ using JenkinsDotNet.Model;
 
 namespace JenkinsDotNet.Services
 {
-    public sealed class JenkinsDataService :IJenkinsDataService
+    public sealed class JenkinsDataService : IJenkinsDataService
     {
         private static readonly JenkinsDataService instance = new JenkinsDataService();
 
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
+        /// <summary>
+        /// Initializes the <see cref="JenkinsDataService"/> class.
+        /// </summary>
         static JenkinsDataService()
         {
         }
@@ -25,21 +28,30 @@ namespace JenkinsDotNet.Services
 
         public static JenkinsDataService Instance
         {
-            get
-            {
-                return instance;
-            }
+            get { return instance; }
         }
 
-        public async Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey, params object[] parameters) where T : JenkinsModel, new()
+        /// <summary>
+        /// Requests the async.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="component">The component.</param>
+        /// <param name="baseUrl">The base URL.</param>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="apiKey">The API key.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns></returns>
+        public async Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey,
+                                             params object[] parameters) where T : JenkinsModel, new()
         {
-            var request = ComposeMessage(baseUrl + component.Url(parameters), userName, apiKey);
-            var task = SendMessage(request);
-            var readTask = (await task).Content.ReadAsStringAsync();
+            HttpRequestMessage request = ComposeMessage(baseUrl + component.Url(parameters), userName, apiKey);
+            Task<HttpResponseMessage> task = SendMessage(request);
+            Task<string> readTask = (await task).Content.ReadAsStringAsync();
             return await readTask.ContinueWith(task1 => GetObject<T>(XElement.Parse(task1.Result)));
         }
 
-        private static HttpRequestMessage ComposeMessage(string url, string userName, string apiKey, bool authenticated = true)
+        private static HttpRequestMessage ComposeMessage(string url, string userName, string apiKey,
+                                                         bool authenticated = true)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             if (authenticated) AddAuthenticationHeader(request, userName, apiKey);
@@ -55,7 +67,7 @@ namespace JenkinsDotNet.Services
 
         private static void AddAuthenticationHeader(HttpRequestMessage request, string userName, string apiKey)
         {
-            var encodedKey = Convert.ToBase64String(Encoding.UTF8.GetBytes(userName + ":" + apiKey));
+            string encodedKey = Convert.ToBase64String(Encoding.UTF8.GetBytes(userName + ":" + apiKey));
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", encodedKey);
         }
 

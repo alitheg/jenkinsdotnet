@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace JenkinsDotNet.Model
 {
+    /// <summary>
+    /// Represents the overallload of a Jenkins node.
+    /// </summary>
     public class LoadStatistics : JenkinsModel
     {
-        
         public float QueueLength { get; set; }
         public float BusyExecutors { get; set; }
         public float TotalExecutors { get; set; }
@@ -17,6 +16,5 @@ namespace JenkinsDotNet.Model
         {
             throw new NotImplementedException();
         }
-
     }
 }

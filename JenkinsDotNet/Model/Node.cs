@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace JenkinsDotNet.Model
 {
+    /// <summary>
+    /// Represents a single Jenkins node
+    /// </summary>
     public class Node : JenkinsModel
     {
         public string Description { get; set; }
@@ -17,13 +18,12 @@ namespace JenkinsDotNet.Model
 
         protected override void ParseFromXml(XElement element)
         {
-            var elements = element.Elements().ToList();
+            List<XElement> elements = element.Elements().ToList();
             Name = elements.First(x => x.Name == "nodeName").Value;
             Description = elements.First(x => x.Name == "nodeDescription").Value;
             int numExecutors;
             int.TryParse(elements.First(x => x.Name == "numExecutors").Value, out numExecutors);
             NumExecutors = numExecutors;
-
         }
     }
 }
