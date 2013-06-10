@@ -18,9 +18,5 @@ namespace JenkinsDotNet.Model
             throw new NotImplementedException();
         }
 
-        public override URL ObjectUrl
-        {
-	        get { return URL.LoadStatistics; }
-        }
     }
 }

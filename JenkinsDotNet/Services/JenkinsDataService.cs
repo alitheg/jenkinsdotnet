@@ -1,30 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using JenkinsDotNet.Interfaces;
 using JenkinsDotNet.Model;
 
-namespace JenkinsDotNet
+namespace JenkinsDotNet.Services
 {
-    public sealed class DataService
+    public sealed class JenkinsDataService :IJenkinsDataService
     {
-        private static readonly DataService instance = new DataService();
+        private static readonly JenkinsDataService instance = new JenkinsDataService();
 
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
-        static DataService()
+        static JenkinsDataService()
         {
         }
 
-        private DataService()
+        private JenkinsDataService()
         {
         }
 
-        public static DataService Instance
+        public static JenkinsDataService Instance
         {
             get
             {
@@ -32,9 +31,9 @@ namespace JenkinsDotNet
             }
         }
 
-        public async Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey) where T : JenkinsModel, new()
+        public async Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey, params object[] parameters) where T : JenkinsModel, new()
         {
-            var request = ComposeMessage(baseUrl + component, userName, apiKey);
+            var request = ComposeMessage(baseUrl + component.Url(parameters), userName, apiKey);
             var task = SendMessage(request);
             var readTask = (await task).Content.ReadAsStringAsync();
             return await readTask.ContinueWith(task1 => GetObject<T>(XElement.Parse(task1.Result)));

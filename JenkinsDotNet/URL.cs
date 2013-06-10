@@ -21,9 +21,9 @@ namespace JenkinsDotNet
             this._url = url;
         }
 
-        public String Url(object parameter)
+        public String Url(params object[] parameters)
         {
-            return String.Format(this.ToString(), parameter);
+            return String.Format(this.ToString(), parameters);
         }
 
         public override String ToString()

@@ -33,7 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataService.cs" />
+    <Compile Include="Services\JenkinsDataService.cs" />
+    <Compile Include="Interfaces\IJenkinsDataService.cs" />
     <Compile Include="Model\JenkinsModel.cs" />
     <Compile Include="Model\Job.cs" />
     <Compile Include="Model\LoadStatistics.cs" />
@@ -70,6 +71,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />

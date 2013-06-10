@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using JenkinsDotNet.Model;
+using JenkinsDotNet.Services;
 
 namespace JenkinsDotNet
 {
@@ -17,7 +18,7 @@ namespace JenkinsDotNet
         public string Name { get; set; }
         public string UserName { get; set; }
         public string ApiKey { get; set; }
-        private readonly DataService dataService;
+        private readonly JenkinsDataService _jenkinsDataService;
 
         public JenkinsServer(string url, string username, string apikey, string name = "Jenkins Server")
         {
@@ -25,18 +26,29 @@ namespace JenkinsDotNet
             UserName = username;
             ApiKey = apikey;
             Name = name;
-            dataService = DataService.Instance;
+            _jenkinsDataService = JenkinsDataService.Instance;
         }
 
         public Node GetNodeDetails()
         {
-            var returnVal = dataService.RequestAsync<Node>(URL.Api, Url, UserName, ApiKey);
+            var returnVal = _jenkinsDataService.RequestAsync<Node>(URL.Api, Url, UserName, ApiKey);
             returnVal.Wait();
             return returnVal.Result;
         }
         public async Task<Node> GetNodeDetailsAsync()
         {
-            return await dataService.RequestAsync<Node>(URL.Api, Url, UserName, ApiKey);
+            return await _jenkinsDataService.RequestAsync<Node>(URL.Api, Url, UserName, ApiKey);
+        }
+
+        public Job GetJobDetails(string jobName)
+        {
+            var returnVal = _jenkinsDataService.RequestAsync<Job>(URL.Job, Url, UserName, ApiKey, jobName);
+            returnVal.Wait();
+            return returnVal.Result;
+        }
+        public async Task<Job> GetJobDetailsAsync(string jobName)
+        {
+            return await _jenkinsDataService.RequestAsync<Job>(URL.Job, Url, UserName, ApiKey, jobName);
         }
     }
 }

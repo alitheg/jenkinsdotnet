@@ -18,9 +18,5 @@ namespace JenkinsDotNet.Model
 
         protected abstract void ParseFromXml(XElement element);
 
-        public virtual URL ObjectUrl
-        {
-            get { return URL.Api; }
-        }
     }
 }
