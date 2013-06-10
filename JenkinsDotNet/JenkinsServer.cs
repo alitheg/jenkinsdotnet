@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using JenkinsDotNet.Interfaces;
 using JenkinsDotNet.Model;
 using JenkinsDotNet.Services;
 
@@ -18,7 +19,7 @@ namespace JenkinsDotNet
         public string Name { get; set; }
         public string UserName { get; set; }
         public string ApiKey { get; set; }
-        private readonly JenkinsDataService _jenkinsDataService;
+        private readonly IJenkinsDataService _jenkinsDataService;
 
         public JenkinsServer(string url, string username, string apikey, string name = "Jenkins Server")
         {
@@ -27,6 +28,14 @@ namespace JenkinsDotNet
             ApiKey = apikey;
             Name = name;
             _jenkinsDataService = JenkinsDataService.Instance;
+        }
+        public JenkinsServer(IJenkinsDataService dataService, string url, string username, string apikey, string name = "Jenkins Server")
+        {
+            Url = url;
+            UserName = username;
+            ApiKey = apikey;
+            Name = name;
+            _jenkinsDataService = dataService;
         }
 
         public Node GetNodeDetails()

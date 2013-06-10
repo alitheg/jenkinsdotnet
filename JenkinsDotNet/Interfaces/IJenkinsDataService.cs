@@ -7,7 +7,7 @@ using JenkinsDotNet.Model;
 
 namespace JenkinsDotNet.Interfaces
 {
-    interface IJenkinsDataService
+    public interface IJenkinsDataService
     {
         Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey,
                                              params object[] parameters) where T : JenkinsModel, new();
