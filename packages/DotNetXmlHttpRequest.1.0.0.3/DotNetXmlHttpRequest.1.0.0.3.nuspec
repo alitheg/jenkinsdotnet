@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DotNetXmlHttpRequest</id>
+    <version>1.0.0.3</version>
+    <title>DotNetXmlHttpRequest</title>
+    <authors>Ycaro Afonso</authors>
+    <owners>Ycaro Afonso</owners>
+    <licenseUrl>http://www.gnu.org/copyleft/lesser.html</licenseUrl>
+    <projectUrl>http://ycaro.net/tag/dotnetxmlhttprequest/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Calls httprequest request and returns the HttpResponse in a way easier than the native.</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>XmlHttpRequest HttpWebRequest HttpWebResponse Request Response</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

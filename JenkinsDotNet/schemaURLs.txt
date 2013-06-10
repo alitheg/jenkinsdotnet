@@ -1,0 +1,10 @@
+https://jenkins.alitheg.co.uk/api/xml
+https://jenkins.alitheg.co.uk/api/schema
+
+https://jenkins.alitheg.co.uk/overallLoad/api/xml
+https://jenkins.alitheg.co.uk/overallLoad/api/schema
+
+https://jenkins.alitheg.co.uk/queue/api/xml
+https://jenkins.alitheg.co.uk/queue/api/schema
+
+https://jenkins.alitheg.co.uk/job/Build.deb/api/xml
