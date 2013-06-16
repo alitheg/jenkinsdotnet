@@ -11,7 +11,7 @@
     <RootNamespace>JenkinsDotNet</RootNamespace>
     <AssemblyName>JenkinsDotNet</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile96</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\JenkinsDotNet.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,10 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Model\Build.cs" />
+    <Compile Include="Model\Job.cs" />
     <Compile Include="Services\JenkinsDataService.cs" />
     <Compile Include="Interfaces\IJenkinsDataService.cs" />
     <Compile Include="Model\JenkinsModel.cs" />
-    <Compile Include="Model\Job.cs" />
     <Compile Include="Model\LoadStatistics.cs" />
     <Compile Include="Model\Node.cs" />
     <Compile Include="Model\QueueTask.cs" />

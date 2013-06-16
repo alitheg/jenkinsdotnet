@@ -21,6 +21,6 @@ namespace JenkinsDotNet.Interfaces
         /// <param name="parameters">The parameters.</param>
         /// <returns></returns>
         Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey,
-                                params object[] parameters) where T : JenkinsModel, new();
+                                params object[] parameters) where T : JenkinsModel<T>, new();
     }
 }

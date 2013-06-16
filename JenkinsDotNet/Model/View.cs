@@ -7,13 +7,13 @@ namespace JenkinsDotNet.Model
     /// <summary>
     /// Represents an individual view
     /// </summary>
-    public class View : JenkinsModel
+    public class View : JenkinsModel<View>
     {
         public string Name { get; set; }
         public string Url { get; set; }
         public IList<Job> Jobs { get; set; }
 
-        protected override void ParseFromXml(XElement element)
+        protected override bool ParseFromXml(XElement element)
         {
             throw new NotImplementedException();
         }

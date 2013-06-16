@@ -81,7 +81,7 @@ namespace JenkinsDotNet
         /// <returns></returns>
         public Node GetNodeDetails()
         {
-            Task<Node> returnVal = _jenkinsDataService.RequestAsync<Node>(URL.Api, Url, UserName, ApiKey);
+            var returnVal = GetNodeDetailsAsync();
             returnVal.Wait();
             return returnVal.Result;
         }
@@ -102,7 +102,7 @@ namespace JenkinsDotNet
         /// <returns></returns>
         public Job GetJobDetails(string jobName)
         {
-            Task<Job> returnVal = _jenkinsDataService.RequestAsync<Job>(URL.Job, Url, UserName, ApiKey, jobName);
+            var returnVal = GetJobDetailsAsync(jobName);
             returnVal.Wait();
             return returnVal.Result;
         }
@@ -115,6 +115,66 @@ namespace JenkinsDotNet
         public async Task<Job> GetJobDetailsAsync(string jobName)
         {
             return await _jenkinsDataService.RequestAsync<Job>(URL.Job, Url, UserName, ApiKey, jobName);
+        }
+        /// <summary>
+        /// Gets the job details.
+        /// </summary>
+        /// <param name="summary">The summary.</param>
+        /// <returns></returns>
+        public Job GetJobDetails(Job summary)
+        {
+            return GetJobDetails(summary.Name);
+        }
+
+        /// <summary>
+        /// Gets the job details async.
+        /// </summary>
+        /// <param name="summary">The summary.</param>
+        /// <returns></returns>
+        public async Task<Job> GetJobDetailsAsync(Job summary)
+        {
+            return await GetJobDetailsAsync(summary.Name);
+        }
+
+        /// <summary>
+        /// Gets the job details.
+        /// </summary>
+        /// <param name="jobName">Name of the job.</param>
+        /// <returns></returns>
+        public Build GetBuildDetails(string jobName, string buildNumber)
+        {
+            var returnVal = GetBuildDetailsAsync(jobName, buildNumber);
+            returnVal.Wait();
+            return returnVal.Result;
+        }
+
+        /// <summary>
+        /// Gets the job details async.
+        /// </summary>
+        /// <param name="jobName">Name of the job.</param>
+        /// <returns></returns>
+        public async Task<Build> GetBuildDetailsAsync(string jobName, string buildNumber)
+        {
+            return await _jenkinsDataService.RequestAsync<Build>(URL.Build, Url, UserName, ApiKey, jobName, buildNumber);
+        }
+        /// <summary>
+        /// Gets the job details.
+        /// </summary>
+        /// <param name="summary">The summary.</param>
+        /// <returns></returns>
+        public Build GetBuildDetails(Job job, Build summary)
+        {
+            return GetBuildDetails(job.Name, summary.Number);
+        }
+
+        /// <summary>
+        /// Gets the job details async.
+        /// </summary>
+        /// <param name="summary">The summary.</param>
+        /// <returns></returns>
+        public async Task<Build> GetBuildDetailsAsync(Job job, Build summary)
+        {
+            return await GetBuildDetailsAsync(job.Name, summary.Number);
         }
     }
 }

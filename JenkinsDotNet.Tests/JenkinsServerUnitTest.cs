@@ -19,8 +19,19 @@ namespace JenkinsDotNet.Tests
         readonly string _name = "Test Jenkins Server";
         readonly string _jobName = "Test Jenkins Job";
         readonly object[] _jobNameList = new object[1];
+        readonly string _buildNumber = "99";
+        readonly object[] _buildNumberList = new object[2];
         private IJenkinsDataService _mockDataService;
         private JenkinsServer _targetServer;
+
+        internal class MockJob : Job
+        {
+            public new string Name { get; set; }
+        }
+        internal class MockBuild : Build
+        {
+            public new string Number { get; set; }
+        }
 
         [TestInitialize]
         public void InitTests()
@@ -29,6 +40,8 @@ namespace JenkinsDotNet.Tests
             _mockDataService = MockRepository.GenerateStub<IJenkinsDataService>();
             _targetServer = new JenkinsServer(_mockDataService, _url, _userName, _apiKey, _name);
             _jobNameList[0] = _jobName;
+            _buildNumberList[0] = _buildNumber;
+            _buildNumberList[1] = _jobName;
 
         }
 
@@ -103,7 +116,7 @@ namespace JenkinsDotNet.Tests
         public void GetJobDetails_ServiceAvailable_JobReturned()
         {
             // Arrange
-            var expected = new Job { Name = _jobName };
+            var expected = new MockJob { Name = _jobName };
             var expectedTask = new Task<Job>(() => expected);
             expectedTask.Start();
 
@@ -123,7 +136,7 @@ namespace JenkinsDotNet.Tests
         public void GetJobDetailsAsync_ServiceAvailable_JobReturned()
         {
             // Arrange
-            var expected = new Job { Name = _jobName };
+            var expected = new MockJob { Name = _jobName };
             var expectedTask = new Task<Job>(() => expected);
             expectedTask.Start();
 
@@ -137,6 +150,51 @@ namespace JenkinsDotNet.Tests
 
             // Act
             var actualTask = _targetServer.GetJobDetailsAsync(_jobName);
+            actualTask.Wait();
+            var actual = actualTask.Result;
+
+            // Assert
+            Assert.AreEqual(actual, expected);
+            _mockDataService.VerifyAllExpectations();
+        }
+        [TestMethod]
+        public void GetBuildDetails_ServiceAvailable_BuildReturned()
+        {
+            // Arrange
+            var expected = new MockBuild { Number = _buildNumber };
+            var expectedTask = new Task<Build>(() => expected);
+            expectedTask.Start();
+
+            // VS reports a compiler error here but tests run fine...
+            _mockDataService.Expect(ds => ds.RequestAsync<Build>(Arg.Is(URL.Build), Arg.Is(_url), Arg.Is(_userName), Arg.Is(_apiKey), Arg<object[]>.List.ContainsAll(_buildNumberList)))
+                           .Return(expectedTask);
+
+            // Act
+            var actual = _targetServer.GetBuildDetails(_jobName,_buildNumber);
+
+            // Assert
+            Assert.AreEqual(actual, expected);
+            _mockDataService.VerifyAllExpectations();
+        }
+
+        [TestMethod]
+        public void GetBuildDetailsAsync_ServiceAvailable_BuildReturned()
+        {
+            // Arrange
+            var expected = new MockBuild { Number = _buildNumber };
+            var expectedTask = new Task<Build>(() => expected);
+            expectedTask.Start();
+
+            // VS reports a compiler error here but tests run fine...
+            _mockDataService.Expect(ds => ds.RequestAsync<Build>(Arg.Is(URL.Build), Arg.Is(_url), Arg.Is(_userName), Arg.Is(_apiKey), Arg<object[]>.List.ContainsAll(_buildNumberList)))
+                           .Return(expectedTask);
+            //mockDataService.Expect(
+            //    ds =>ds.RequestAsync<Node>(Arg.Is(URL.Api), Arg.Is(url), Arg.Is(userName), Arg.Is(apiKey),Arg<object[]>.Is.Anything));
+
+            _targetServer = new JenkinsServer(_mockDataService, _url, _userName, _apiKey, _name);
+
+            // Act
+            var actualTask = _targetServer.GetBuildDetailsAsync(_jobName,_buildNumber);
             actualTask.Wait();
             var actual = actualTask.Result;
 

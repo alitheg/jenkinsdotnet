@@ -42,7 +42,7 @@ namespace JenkinsDotNet.Services
         /// <param name="parameters">The parameters.</param>
         /// <returns></returns>
         public async Task<T> RequestAsync<T>(URL component, string baseUrl, string userName, string apiKey,
-                                             params object[] parameters) where T : JenkinsModel, new()
+                                             params object[] parameters) where T : JenkinsModel<T>, new()
         {
             HttpRequestMessage request = ComposeMessage(baseUrl + component.Url(parameters), userName, apiKey);
             Task<HttpResponseMessage> task = SendMessage(request);
@@ -71,9 +71,9 @@ namespace JenkinsDotNet.Services
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", encodedKey);
         }
 
-        private static T GetObject<T>(XElement xml) where T : JenkinsModel, new()
+        private static T GetObject<T>(XElement xml) where T : JenkinsModel<T>, new()
         {
-            return JenkinsModel.FromXml<T>(xml);
+            return JenkinsModel<T>.FromXml(xml);
         }
     }
 }
