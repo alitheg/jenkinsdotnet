@@ -1,32 +1,19 @@
-﻿// ***********************************************************************
-// Assembly         : JenkinsDotNet
-// Author           : Alastair
-// Created          : 06-10-2013
-//
-// Last Modified By : Alastair
-// Last Modified On : 06-16-2013
-// ***********************************************************************
-// <copyright file="JenkinsModel.cs" company="">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System.Reflection;
+﻿using System.Reflection;
 using System.Xml.Linq;
 
 namespace JenkinsDotNet.Model
 {
     /// <summary>
-    /// Base class for models, providing a common functionality
+    /// Base class for models, providing common functionality
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class JenkinsModel<T> where T : JenkinsModel<T>,new()
     {
         /// <summary>
-        /// Froms the XML.
+        /// Read a model from an XML fragment.
         /// </summary>
-        /// <param name="element">The element.</param>
-        /// <returns>`0.</returns>
+        /// <param name="element">XML fragment</param>
+        /// <returns>Object of the current type</returns>
         public static T FromXml(XElement element)
         {
             var newObj = new T();
@@ -34,16 +21,16 @@ namespace JenkinsDotNet.Model
         }
 
         /// <summary>
-        /// Parses from XML.
+        /// Parses a model from Jenkins API XML.
         /// </summary>
-        /// <param name="element">The element.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
+        /// <param name="element">XML fragment representing a model</param>
+        /// <returns><c>true</c> if XML was valid, <c>false</c> otherwise</returns>
         protected abstract bool ParseFromXml(XElement element);
 
         /// <summary>
-        /// Updates from.
+        /// Updates a model from another instance of the same model.
         /// </summary>
-        /// <param name="source">The source.</param>
+        /// <param name="source">The source object</param>
         public virtual void UpdateFrom(T source)
         {
             // Iterate the Properties of the destination instance and  

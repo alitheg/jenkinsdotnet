@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsDotNet", "JenkinsDot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsDotNet.Tests", "JenkinsDotNet.Tests\JenkinsDotNet.Tests.csproj", "{950024CF-6BA5-46DF-9693-CBA3FF66E3C8}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation1", "Documentation1\Documentation1.shfbproj", "{AAAFC980-D89E-4385-A027-CEC274737522}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,14 @@ Global
 		{950024CF-6BA5-46DF-9693-CBA3FF66E3C8}.Release|ARM.ActiveCfg = Release|Any CPU
 		{950024CF-6BA5-46DF-9693-CBA3FF66E3C8}.Release|x64.ActiveCfg = Release|Any CPU
 		{950024CF-6BA5-46DF-9693-CBA3FF66E3C8}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Release|ARM.ActiveCfg = Release|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Release|x64.ActiveCfg = Release|Any CPU
+		{AAAFC980-D89E-4385-A027-CEC274737522}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

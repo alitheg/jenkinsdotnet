@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : JenkinsDotNet
-// Author           : Alastair
-// Created          : 06-15-2013
-//
-// Last Modified By : Alastair
-// Last Modified On : 06-16-2013
-// ***********************************************************************
-// <copyright file="Build.cs" company="">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -23,32 +10,37 @@ namespace JenkinsDotNet.Model
     public class Build : JenkinsModel<Build>
     {
         /// <summary>
-        /// Gets the number.
+        /// Gets the build number.
         /// </summary>
-        /// <value>The number.</value>
+        /// <value>The build number.</value>
         public string Number { get; private set; }
         /// <summary>
-        /// Gets the URL.
+        /// Gets the build URL.
         /// </summary>
-        /// <value>The URL.</value>
+        /// <value>The build URL</value>
         public string Url { get; private set; }
         /// <summary>
-        /// Gets the short description.
+        /// Gets a short description of the build.
         /// </summary>
-        /// <value>The short description.</value>
+        /// <value>Short description of the build</value>
         public string ShortDescription { get; private set; }
         /// <summary>
-        /// Gets the full name of the display.
+        /// Gets the full display name of the build.
         /// </summary>
-        /// <value>The full name of the display.</value>
+        /// <value>The full name of the build</value>
         public string FullDisplayName { get; private set; }
+        /// <summary>
+        /// Gets or sets the job this build belongs to.
+        /// </summary>
+        /// <value>The job</value>
+        public Job Job { get; set; }
         //TODO:Add other fields
 
         /// <summary>
-        /// Parses from XML.
+        /// Parses a build from Jenkins API XML.
         /// </summary>
-        /// <param name="element">The element.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
+        /// <param name="element">XML fragment representing a build</param>
+        /// <returns><c>true</c> if XML was valid, <c>false</c> otherwise</returns>
         protected override bool ParseFromXml(XElement element)
         {
             if (element == null) return false;
