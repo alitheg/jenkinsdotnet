@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Model\Build.cs" />
+    <Compile Include="Model\Computer.cs" />
     <Compile Include="Model\Job.cs" />
     <Compile Include="Services\JenkinsDataService.cs" />
     <Compile Include="Interfaces\IJenkinsDataService.cs" />

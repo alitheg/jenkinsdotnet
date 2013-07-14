@@ -165,5 +165,28 @@ namespace JenkinsDotNet
         {
             return await GetBuildDetailsAsync(job.Name, buildNumber);
         }
+
+
+        /// <summary>
+        /// Gets details of a computer.
+        /// </summary>
+        /// <param name="computerName">Name of the computer requested</param>
+        /// <returns>The requested computer</returns>
+        public Computer GetComputerDetails(string computerName)
+        {
+            var returnVal = GetComputerDetailsAsync(computerName);
+            returnVal.Wait();
+            return returnVal.Result;
+        }
+
+        /// <summary>
+        /// Asynchronously gets details of a computer
+        /// </summary>
+        /// <param name="computerName">Name of the computer requested</param>
+        /// <returns>Task to retrieve the computer</returns>
+        public async Task<Computer> GetComputerDetailsAsync(string computerName)
+        {
+            return await _jenkinsDataService.RequestAsync<Computer>(URL.Computer, Url, UserName, ApiKey, computerName);
+        }
     }
 }
