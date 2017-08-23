@@ -6,4 +6,4 @@ Jenkins.NET currently supports .NET 4.5, Silverlight 4 and higher, Windows Phone
 
 Please feel free to download and use the library in Jenkins applications, and contribute by submitting issues and discussion to help me enhance Jenkins.NET.
 
-** This project is not maintained as I'm not working day-to-day with .NET any more. Feel free to submit pull requests for new functionality and/or fixes! **
+**This project is not maintained as I'm not working day-to-day with .NET any more. Feel free to submit pull requests for new functionality and/or fixes!**
